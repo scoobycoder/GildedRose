@@ -1,6 +1,14 @@
 
 public class ManaCake implements Item {
 
+	private int quantity;
+	private int sellIn;
+
+	public ManaCake(int sellIn, int quantity) {
+		this.sellIn = sellIn;
+		this.quantity = quantity;
+	}
+	
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub

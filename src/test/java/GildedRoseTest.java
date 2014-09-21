@@ -5,17 +5,20 @@ import java.util.List;
 
 import org.junit.Test;
 
-
 public class GildedRoseTest {
 
 	@Test
-	public void shouldAllowAddingInventory() {
+	public void shouldStockHandlerAllowAddingInventory() {
 		List<Item> expectedItems = new ArrayList<Item>();
-		Item manaCake = new ManaCake();
+		Item manaCake = new ManaCake(10, 5);
 
 		expectedItems.add(manaCake);
 		
-		StockHandler stocker = null;
-		assertEquals(expectedItems.get(0), stocker.inventoryReport());
+		StockHandler stocker = new StockHandler();
+		stocker.addItem(manaCake);
+		assertEquals(expectedItems, stocker.inventoryReport());
 	}
+	
+	
+	
 }
