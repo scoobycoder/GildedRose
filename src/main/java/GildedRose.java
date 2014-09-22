@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.List;
-
 
 public class GildedRose {
 
@@ -15,12 +13,11 @@ public class GildedRose {
 		
         StockHandler stockHandler = new StockHandler();
         stockHandler.addItem(new ManaCake(10, 5));
-        
-//        items.add(new Item("+5 Dexterity Vest", 10, 20));
-//        items.add(new Item("Aged Brie", 2, 0));
-//        items.add(new Item("Elixir of the Mongoose", 5, 7));
-//        items.add(new Item("Sulfuras, Hand of Ragnaros", 0, 80));
-//        items.add(new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20));
+        stockHandler.addItem(new DexterityVest(10, 20));
+        stockHandler.addItem(new AgedBrie(2, 0));
+        stockHandler.addItem(new ElixirMongoose(5, 7));
+        stockHandler.addItem(new SulfurasRagnaros(0, 80));
+        stockHandler.addItem(new BackstagePasses(15, 20));
 
         items = stockHandler.inventoryReport();
         updateQuality();

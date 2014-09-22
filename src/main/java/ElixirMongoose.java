@@ -12,12 +12,6 @@ public class ElixirMongoose implements Item {
 	}
 
 	@Override
-	public void setName(String name) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public int getSellIn() {
 		// TODO Auto-generated method stub
 		return 0;
