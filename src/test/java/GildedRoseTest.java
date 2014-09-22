@@ -52,7 +52,6 @@ public class GildedRoseTest {
 		stocker.addItem(backstagePasses);
 		
 		assertEquals(expectedItems, stocker.inventoryReport());
-		
 	}
 
 	
