@@ -10,8 +10,8 @@ public class StockHandler {
 		return itemList;
 	}
 
-	public void addItem(Item manaCake) {
-		itemList.add(manaCake);
+	public void addItem(Item item) {
+		itemList.add(item);
 	}
 
 }
