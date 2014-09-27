@@ -3,6 +3,7 @@ public class ManaCake implements Item {
 
 	private int quantity;
 	private int sellIn;
+	private String name = "Mana Cake";
 
 	public ManaCake(int sellIn, int quantity) {
 		this.sellIn = sellIn;
@@ -11,32 +12,27 @@ public class ManaCake implements Item {
 	
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 
 	@Override
 	public int getSellIn() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sellIn;
 	}
 
 	@Override
 	public void setSellIn(int sellIn) {
-		// TODO Auto-generated method stub
-
+		this.sellIn = sellIn;
 	}
 
 	@Override
 	public int getQuality() {
-		// TODO Auto-generated method stub
-		return 0;
+		return quantity;
 	}
 
 	@Override
 	public void setQuality(int quality) {
-		// TODO Auto-generated method stub
-
+		quantity = quality;
 	}
 
 }

@@ -53,5 +53,14 @@ public class GildedRoseTest {
 		
 		assertEquals(expectedItems, stocker.inventoryReport());
 	}
+
+	@Test
+	public void removeManaCakeWhenAboutToSpoil() {
+		Item manaCake = new ManaCake(0, 1);
+		stocker.addItem(manaCake);
+		stocker.updateQuality();
+		
+		assertEquals(0, stocker.inventoryReport().get(0).getQuality());
+	}
 	
 }

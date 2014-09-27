@@ -17,12 +17,10 @@ public class StockHandler {
 	public void addItem(Item item) {
 		itemList.add(item);
 	}
-
-	private static List<Item> items = null;
 	
-    public static void updateQuality()
+    public void updateQuality()
     {
-        for (int itemNumber = 0; itemNumber < items.size(); itemNumber++)
+        for (int itemNumber = 0; itemNumber < itemList.size(); itemNumber++)
         {
             if (notAgedBrie(itemNumber) && notTafkal80Etc(itemNumber)) 
             {
@@ -87,80 +85,55 @@ public class StockHandler {
         }
     }
 
-
-
-	private static void restockNeededItems(int itemNumber) {
+	private void restockNeededItems(int itemNumber) {
 		if (needToRestock(itemNumber))
 		{
 		    buyItem(itemNumber);
 		}
 	}
 
-
-
-	private static boolean isTafkal80Etc(int itemNumber) {
-		return TAFKAL80ETC.equals(items.get(itemNumber).getName());
+	private boolean isTafkal80Etc(int itemNumber) {
+		return TAFKAL80ETC.equals(itemList.get(itemNumber).getName());
 	}
 
-
-
-	private static void removeAllQuantity(int itemNumber) {
-		items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() - items.get(itemNumber).getQuality());
+	private void removeAllQuantity(int itemNumber) {
+		itemList.get(itemNumber).setQuality(itemList.get(itemNumber).getQuality() - itemList.get(itemNumber).getQuality());
 	}
 
-
-
-	private static void removeItem(int itemNumber) {
-		items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() - 1);
+	private void removeItem(int itemNumber) {
+		itemList.get(itemNumber).setQuality(itemList.get(itemNumber).getQuality() - 1);
 	}
 
-
-
-	private static boolean notTafkal80Etc(int itemNumber) {
+	private boolean notTafkal80Etc(int itemNumber) {
 		return !isTafkal80Etc(itemNumber);
 	}
 
-
-
-	private static boolean notAgedBrie(int itemNumber) {
-		return !AGED_BRIE.equals(items.get(itemNumber).getName());
+	private boolean notAgedBrie(int itemNumber) {
+		return !AGED_BRIE.equals(itemList.get(itemNumber).getName());
 	}
 
-
-
-	private static boolean notSulfurasRagnaros(int itemNumber) {
-		return !SULFURAS_RAGNAROS.equals(items.get(itemNumber).getName());
+	private boolean notSulfurasRagnaros(int itemNumber) {
+		return !SULFURAS_RAGNAROS.equals(itemList.get(itemNumber).getName());
 	}
 
-
-
-	private static void buyItem(int itemNumber) {
-		items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() + 1);
+	private void buyItem(int itemNumber) {
+		itemList.get(itemNumber).setQuality(itemList.get(itemNumber).getQuality() + 1);
 	}
 
-
-
-	private static void itemAgedADay(int itemNumber) {
-		items.get(itemNumber).setSellIn(items.get(itemNumber).getSellIn() - 1);
+	private void itemAgedADay(int itemNumber) {
+		itemList.get(itemNumber).setSellIn(itemList.get(itemNumber).getSellIn() - 1);
 	}
 
-
-
-	private static boolean outOfStock(int itemNumber) {
-		return items.get(itemNumber).getQuality() > 0;
+	private boolean outOfStock(int itemNumber) {
+		return itemList.get(itemNumber).getQuality() > 0;
 	}
 
-
-
-	private static boolean itemAboutToSpoil(int itemNumber, int daysTillSpoiled) {
-		return items.get(itemNumber).getSellIn() < daysTillSpoiled;
+	private boolean itemAboutToSpoil(int itemNumber, int daysTillSpoiled) {
+		return itemList.get(itemNumber).getSellIn() < daysTillSpoiled;
 	}
 
-
-
-	private static boolean needToRestock(int itemNumber) {
-		return items.get(itemNumber).getQuality() < 50;
+	private boolean needToRestock(int itemNumber) {
+		return itemList.get(itemNumber).getQuality() < 50;
 	}
-
 	
 }
