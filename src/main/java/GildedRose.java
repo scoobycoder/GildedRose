@@ -27,78 +27,84 @@ public class GildedRose {
 	
     public static void updateQuality()
     {
-        for (int i = 0; i < items.size(); i++)
+        for (int itemNumber = 0; itemNumber < items.size(); itemNumber++)
         {
-            if ((!"Aged Brie".equals(items.get(i).getName())) && !"Backstage passes to a TAFKAL80ETC concert".equals(items.get(i).getName())) 
+            if ((!"Aged Brie".equals(items.get(itemNumber).getName())) && !"Backstage passes to a TAFKAL80ETC concert".equals(items.get(itemNumber).getName())) 
             {
-                if (items.get(i).getQuality() > 0)
+                if (items.get(itemNumber).getQuality() > 0)
                 {
-                    if (!"Sulfuras, Hand of Ragnaros".equals(items.get(i).getName()))
+                    if (!"Sulfuras, Hand of Ragnaros".equals(items.get(itemNumber).getName()))
                     {
-                        items.get(i).setQuality(items.get(i).getQuality() - 1);
+                        items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() - 1);
                     }
                 }
             }
             else
             {
-                if (items.get(i).getQuality() < 50)
+                if (needToRestock(itemNumber))
                 {
-                    items.get(i).setQuality(items.get(i).getQuality() + 1);
+                    items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() + 1);
 
-                    if ("Backstage passes to a TAFKAL80ETC concert".equals(items.get(i).getName()))
+                    if ("Backstage passes to a TAFKAL80ETC concert".equals(items.get(itemNumber).getName()))
                     {
-                        if (items.get(i).getSellIn() < 11)
+                        if (items.get(itemNumber).getSellIn() < 11)
                         {
-                            if (items.get(i).getQuality() < 50)
+                            if (needToRestock(itemNumber))
                             {
-                                items.get(i).setQuality(items.get(i).getQuality() + 1);
+                                items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() + 1);
                             }
                         }
 
-                        if (items.get(i).getSellIn() < 6)
+                        if (items.get(itemNumber).getSellIn() < 6)
                         {
-                            if (items.get(i).getQuality() < 50)
+                            if (needToRestock(itemNumber))
                             {
-                                items.get(i).setQuality(items.get(i).getQuality() + 1);
+                                items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() + 1);
                             }
                         }
                     }
                 }
             }
 
-            if (!"Sulfuras, Hand of Ragnaros".equals(items.get(i).getName()))
+            if (!"Sulfuras, Hand of Ragnaros".equals(items.get(itemNumber).getName()))
             {
-                items.get(i).setSellIn(items.get(i).getSellIn() - 1);
+                items.get(itemNumber).setSellIn(items.get(itemNumber).getSellIn() - 1);
             }
 
-            if (items.get(i).getSellIn() < 0)
+            if (items.get(itemNumber).getSellIn() < 0)
             {
-                if (!"Aged Brie".equals(items.get(i).getName()))
+                if (!"Aged Brie".equals(items.get(itemNumber).getName()))
                 {
-                    if (!"Backstage passes to a TAFKAL80ETC concert".equals(items.get(i).getName()))
+                    if (!"Backstage passes to a TAFKAL80ETC concert".equals(items.get(itemNumber).getName()))
                     {
-                        if (items.get(i).getQuality() > 0)
+                        if (items.get(itemNumber).getQuality() > 0)
                         {
-                            if (!"Sulfuras, Hand of Ragnaros".equals(items.get(i).getName()))
+                            if (!"Sulfuras, Hand of Ragnaros".equals(items.get(itemNumber).getName()))
                             {
-                                items.get(i).setQuality(items.get(i).getQuality() - 1);
+                                items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() - 1);
                             }
                         }
                     }
                     else
                     {
-                        items.get(i).setQuality(items.get(i).getQuality() - items.get(i).getQuality());
+                        items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() - items.get(itemNumber).getQuality());
                     }
                 }
                 else
                 {
-                    if (items.get(i).getQuality() < 50)
+                    if (needToRestock(itemNumber))
                     {
-                        items.get(i).setQuality(items.get(i).getQuality() + 1);
+                        items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() + 1);
                     }
                 }
             }
         }
     }
+
+
+
+	private static boolean needToRestock(int itemNumber) {
+		return items.get(itemNumber).getQuality() < 50;
+	}
 
 }
