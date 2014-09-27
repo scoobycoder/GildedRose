@@ -53,6 +53,5 @@ public class GildedRoseTest {
 		
 		assertEquals(expectedItems, stocker.inventoryReport());
 	}
-
 	
 }
