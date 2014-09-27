@@ -2,6 +2,9 @@ import java.util.List;
 
 public class GildedRose {
 
+	private static final String AGED_BRIE = "Aged Brie";
+	private static final String SULFURAS_RAGNAROS = "Sulfuras, Hand of Ragnaros";
+	private static final String TAFKAL80ETC = "Backstage passes to a TAFKAL80ETC concert";
 	private static List<Item> items = null;
 
 	/**
@@ -29,11 +32,11 @@ public class GildedRose {
     {
         for (int itemNumber = 0; itemNumber < items.size(); itemNumber++)
         {
-            if ((!"Aged Brie".equals(items.get(itemNumber).getName())) && !"Backstage passes to a TAFKAL80ETC concert".equals(items.get(itemNumber).getName())) 
+            if ((!AGED_BRIE.equals(items.get(itemNumber).getName())) && !TAFKAL80ETC.equals(items.get(itemNumber).getName())) 
             {
                 if (items.get(itemNumber).getQuality() > 0)
                 {
-                    if (!"Sulfuras, Hand of Ragnaros".equals(items.get(itemNumber).getName()))
+                    if (!SULFURAS_RAGNAROS.equals(items.get(itemNumber).getName()))
                     {
                         items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() - 1);
                     }
@@ -45,7 +48,7 @@ public class GildedRose {
                 {
                     items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() + 1);
 
-                    if ("Backstage passes to a TAFKAL80ETC concert".equals(items.get(itemNumber).getName()))
+                    if (TAFKAL80ETC.equals(items.get(itemNumber).getName()))
                     {
                         if (items.get(itemNumber).getSellIn() < 11)
                         {
@@ -55,7 +58,7 @@ public class GildedRose {
                             }
                         }
 
-                        if (items.get(itemNumber).getSellIn() < 6)
+                        if (itemAboutToSpoil(itemNumber))
                         {
                             if (needToRestock(itemNumber))
                             {
@@ -66,20 +69,20 @@ public class GildedRose {
                 }
             }
 
-            if (!"Sulfuras, Hand of Ragnaros".equals(items.get(itemNumber).getName()))
+            if (!SULFURAS_RAGNAROS.equals(items.get(itemNumber).getName()))
             {
                 items.get(itemNumber).setSellIn(items.get(itemNumber).getSellIn() - 1);
             }
 
             if (items.get(itemNumber).getSellIn() < 0)
             {
-                if (!"Aged Brie".equals(items.get(itemNumber).getName()))
+                if (!AGED_BRIE.equals(items.get(itemNumber).getName()))
                 {
-                    if (!"Backstage passes to a TAFKAL80ETC concert".equals(items.get(itemNumber).getName()))
+                    if (!TAFKAL80ETC.equals(items.get(itemNumber).getName()))
                     {
                         if (items.get(itemNumber).getQuality() > 0)
                         {
-                            if (!"Sulfuras, Hand of Ragnaros".equals(items.get(itemNumber).getName()))
+                            if (!SULFURAS_RAGNAROS.equals(items.get(itemNumber).getName()))
                             {
                                 items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() - 1);
                             }
@@ -100,6 +103,12 @@ public class GildedRose {
             }
         }
     }
+
+
+
+	private static boolean itemAboutToSpoil(int itemNumber) {
+		return items.get(itemNumber).getSellIn() < 6;
+	}
 
 
 
