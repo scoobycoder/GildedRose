@@ -32,11 +32,11 @@ public class GildedRose {
     {
         for (int itemNumber = 0; itemNumber < items.size(); itemNumber++)
         {
-            if ((!AGED_BRIE.equals(items.get(itemNumber).getName())) && !TAFKAL80ETC.equals(items.get(itemNumber).getName())) 
+            if (notAgedBrie(itemNumber) && notTafkal80Etc(itemNumber)) 
             {
-                if (items.get(itemNumber).getQuality() > 0)
+                if (outOfStock(itemNumber))
                 {
-                    if (!SULFURAS_RAGNAROS.equals(items.get(itemNumber).getName()))
+                    if (notSulfurasRagnaros(itemNumber))
                     {
                         items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() - 1);
                     }
@@ -46,43 +46,43 @@ public class GildedRose {
             {
                 if (needToRestock(itemNumber))
                 {
-                    items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() + 1);
+                    buyItem(itemNumber);
 
                     if (TAFKAL80ETC.equals(items.get(itemNumber).getName()))
                     {
-                        if (items.get(itemNumber).getSellIn() < 11)
+                        if (itemAboutToSpoil(itemNumber, 11))
                         {
                             if (needToRestock(itemNumber))
                             {
-                                items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() + 1);
+                                buyItem(itemNumber);
                             }
                         }
 
-                        if (itemAboutToSpoil(itemNumber))
+                        if (itemAboutToSpoil(itemNumber, 6))
                         {
                             if (needToRestock(itemNumber))
                             {
-                                items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() + 1);
+                                buyItem(itemNumber);
                             }
                         }
                     }
                 }
             }
 
-            if (!SULFURAS_RAGNAROS.equals(items.get(itemNumber).getName()))
+            if (notSulfurasRagnaros(itemNumber))
             {
-                items.get(itemNumber).setSellIn(items.get(itemNumber).getSellIn() - 1);
+                itemAgedADay(itemNumber);
             }
 
-            if (items.get(itemNumber).getSellIn() < 0)
+            if (itemAboutToSpoil(itemNumber, 0))
             {
-                if (!AGED_BRIE.equals(items.get(itemNumber).getName()))
+                if (notAgedBrie(itemNumber))
                 {
-                    if (!TAFKAL80ETC.equals(items.get(itemNumber).getName()))
+                    if (notTafkal80Etc(itemNumber))
                     {
-                        if (items.get(itemNumber).getQuality() > 0)
+                        if (outOfStock(itemNumber))
                         {
-                            if (!SULFURAS_RAGNAROS.equals(items.get(itemNumber).getName()))
+                            if (notSulfurasRagnaros(itemNumber))
                             {
                                 items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() - 1);
                             }
@@ -97,7 +97,7 @@ public class GildedRose {
                 {
                     if (needToRestock(itemNumber))
                     {
-                        items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() + 1);
+                        buyItem(itemNumber);
                     }
                 }
             }
@@ -106,8 +106,44 @@ public class GildedRose {
 
 
 
-	private static boolean itemAboutToSpoil(int itemNumber) {
-		return items.get(itemNumber).getSellIn() < 6;
+	private static boolean notTafkal80Etc(int itemNumber) {
+		return !TAFKAL80ETC.equals(items.get(itemNumber).getName());
+	}
+
+
+
+	private static boolean notAgedBrie(int itemNumber) {
+		return !AGED_BRIE.equals(items.get(itemNumber).getName());
+	}
+
+
+
+	private static boolean notSulfurasRagnaros(int itemNumber) {
+		return !SULFURAS_RAGNAROS.equals(items.get(itemNumber).getName());
+	}
+
+
+
+	private static void buyItem(int itemNumber) {
+		items.get(itemNumber).setQuality(items.get(itemNumber).getQuality() + 1);
+	}
+
+
+
+	private static void itemAgedADay(int itemNumber) {
+		items.get(itemNumber).setSellIn(items.get(itemNumber).getSellIn() - 1);
+	}
+
+
+
+	private static boolean outOfStock(int itemNumber) {
+		return items.get(itemNumber).getQuality() > 0;
+	}
+
+
+
+	private static boolean itemAboutToSpoil(int itemNumber, int daysTillSpoiled) {
+		return items.get(itemNumber).getSellIn() < daysTillSpoiled;
 	}
 
 
