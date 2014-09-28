@@ -23,19 +23,13 @@ public class StockHandler {
 			handleTafkal80Etc(itemNumber);
 			
 			if (agedBrie(itemNumber)) {
-				handleAgedBrie(itemNumber);
+				restockNeededItems(itemNumber);
 			} else {
 				handleInStockItems(itemNumber);
 			}
 
 			ageItems(itemNumber);
 			handleSpoiledItems(itemNumber);
-		}
-	}
-
-	private void handleAgedBrie(int itemNumber) {
-		if (needToRestock(itemNumber)) {
-			buyItem(itemNumber);
 		}
 	}
 
