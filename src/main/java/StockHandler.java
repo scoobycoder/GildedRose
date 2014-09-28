@@ -21,11 +21,7 @@ public class StockHandler {
 		for (int itemNumber = 0; itemNumber < itemList.size(); itemNumber++) {
 			
 			if (isTafkal80Etc(itemNumber)) {
-				if (needToRestock(itemNumber)) {
-					buyItem(itemNumber);
-					buyItem(itemNumber);
-					buyItem(itemNumber);
-				}
+				stockAtLeastThree(itemNumber);
 			}
 			
 			if (notAgedBrie(itemNumber)) {
@@ -38,6 +34,12 @@ public class StockHandler {
 
 			ageItems(itemNumber);
 			handleSpoiledItems(itemNumber);
+		}
+	}
+
+	private void stockAtLeastThree(int itemNumber) {
+		while (itemList.get(itemNumber).getQuality() <= 3) {
+			buyItem(itemNumber);
 		}
 	}
 
