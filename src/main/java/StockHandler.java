@@ -20,20 +20,24 @@ public class StockHandler {
 	public void updateQuality() {
 		for (int itemNumber = 0; itemNumber < itemList.size(); itemNumber++) {
 			
-			if (isTafkal80Etc(itemNumber)) {
-				stockAtLeastThree(itemNumber);
-			}
+			handleTafkal80Etc(itemNumber);
 			
-			if (notAgedBrie(itemNumber)) {
-				handleInStockItems(itemNumber);
-			} else {
+			if (agedBrie(itemNumber)) {
 				if (needToRestock(itemNumber)) {
 					buyItem(itemNumber);
 				}
+			} else {
+				handleInStockItems(itemNumber);
 			}
 
 			ageItems(itemNumber);
 			handleSpoiledItems(itemNumber);
+		}
+	}
+
+	private void handleTafkal80Etc(int itemNumber) {
+		if (isTafkal80Etc(itemNumber)) {
+			stockAtLeastThree(itemNumber);
 		}
 	}
 
@@ -100,6 +104,10 @@ public class StockHandler {
 
 	private boolean notTafkal80Etc(int itemNumber) {
 		return !isTafkal80Etc(itemNumber);
+	}
+
+	private boolean agedBrie(int itemNumber) {
+		return AGED_BRIE.equals(itemList.get(itemNumber).getName());
 	}
 
 	private boolean notAgedBrie(int itemNumber) {
