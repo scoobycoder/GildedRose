@@ -1,8 +1,12 @@
 
 public class AgedBrie implements Item {
 
-	public AgedBrie(int i, int j) {
-		// TODO Auto-generated constructor stub
+	private int quantity;
+	private int sellIn;
+	
+	public AgedBrie(int quantity, int sellIn) {
+		this.quantity = quantity;
+		this.sellIn = sellIn;
 	}
 
 	@Override
@@ -12,26 +16,22 @@ public class AgedBrie implements Item {
 
 	@Override
 	public int getSellIn() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sellIn;
 	}
 
 	@Override
 	public void setSellIn(int sellIn) {
-		// TODO Auto-generated method stub
-
+		this.sellIn = sellIn;
 	}
 
 	@Override
 	public int getQuality() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.quantity;
 	}
 
 	@Override
 	public void setQuality(int quality) {
-		// TODO Auto-generated method stub
-
+		this.quantity = quality;
 	}
 
 }

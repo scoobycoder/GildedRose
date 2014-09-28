@@ -56,11 +56,18 @@ public class GildedRoseTest {
 
 	@Test
 	public void removeManaCakeWhenAboutToSpoil() {
-		Item manaCake = new ManaCake(0, 1);
-		stocker.addItem(manaCake);
+		stocker.addItem(new ManaCake(0, 1));
 		stocker.updateQuality();
 		
 		assertEquals(0, stocker.inventoryReport().get(0).getQuality());
+	}
+
+	@Test
+	public void neverRemoveAgedBrieForSpoiling() {
+		stocker.addItem(new AgedBrie(0, 1));
+		stocker.updateQuality();
+		
+		assertEquals(1, stocker.inventoryReport().get(0).getQuality());
 	}
 	
 }
