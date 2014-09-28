@@ -19,49 +19,59 @@ public class StockHandler {
 
 	public void updateQuality() {
 		for (int itemNumber = 0; itemNumber < itemList.size(); itemNumber++) {
-			if (notAgedBrie(itemNumber) && notTafkal80Etc(itemNumber)) {
-				if (availableStock(itemNumber)) {
-					if (notSulfurasRagnaros(itemNumber)) {
-						removeItem(itemNumber);
-					}
+			
+			if (isTafkal80Etc(itemNumber)) {
+				if (needToRestock(itemNumber)) {
+					buyItem(itemNumber);
+					buyItem(itemNumber);
+					buyItem(itemNumber);
 				}
+			}
+			
+			if (notAgedBrie(itemNumber)) {
+				handleInStockItems(itemNumber);
 			} else {
 				if (needToRestock(itemNumber)) {
 					buyItem(itemNumber);
-
-					if (isTafkal80Etc(itemNumber)) {
-						restockItemsAboutToSpoil(itemNumber);
-					}
 				}
 			}
 
+			ageItems(itemNumber);
+			handleSpoiledItems(itemNumber);
+		}
+	}
+
+	private void handleSpoiledItems(int itemNumber) {
+		if (itemAboutToSpoil(itemNumber, 0)) {
+			handleItemsThatAreCompletelySpoiled(itemNumber);
+		}
+	}
+
+	private void ageItems(int itemNumber) {
+		if (notSulfurasRagnaros(itemNumber)) {
+			itemAgedADay(itemNumber);
+		}
+	}
+
+	private void handleInStockItems(int itemNumber) {
+		if (availableStock(itemNumber)) {
 			if (notSulfurasRagnaros(itemNumber)) {
-				itemAgedADay(itemNumber);
-			}
-
-			if (itemAboutToSpoil(itemNumber, 0)) {
-				if (notAgedBrie(itemNumber) && notTafkal80Etc(itemNumber)) {
-					if (availableStock(itemNumber)) {
-						if (notSulfurasRagnaros(itemNumber)) {
-							removeItem(itemNumber);
-						}
-					} else {
-						removeAllQuantity(itemNumber);
-					}
-				} else {
-					restockNeededItems(itemNumber);
-				}
+				removeItem(itemNumber);
 			}
 		}
 	}
 
-	private void restockItemsAboutToSpoil(int itemNumber) {
-		int daysTillSpoiled = 11;
-
-		while (itemAboutToSpoil(itemNumber, daysTillSpoiled)) {
+	private void handleItemsThatAreCompletelySpoiled(int itemNumber) {
+		if (notAgedBrie(itemNumber) && notTafkal80Etc(itemNumber)) {
+			if (availableStock(itemNumber)) {
+				if (notSulfurasRagnaros(itemNumber)) {
+					removeItem(itemNumber);
+				}
+			} else {
+				removeAllQuantity(itemNumber);
+			}
+		} else {
 			restockNeededItems(itemNumber);
-
-			daysTillSpoiled -= 1;
 		}
 	}
 
