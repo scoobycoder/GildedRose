@@ -23,15 +23,19 @@ public class StockHandler {
 			handleTafkal80Etc(itemNumber);
 			
 			if (agedBrie(itemNumber)) {
-				if (needToRestock(itemNumber)) {
-					buyItem(itemNumber);
-				}
+				handleAgedBrie(itemNumber);
 			} else {
 				handleInStockItems(itemNumber);
 			}
 
 			ageItems(itemNumber);
 			handleSpoiledItems(itemNumber);
+		}
+	}
+
+	private void handleAgedBrie(int itemNumber) {
+		if (needToRestock(itemNumber)) {
+			buyItem(itemNumber);
 		}
 	}
 
@@ -68,7 +72,9 @@ public class StockHandler {
 	}
 
 	private void handleItemsThatAreCompletelySpoiled(int itemNumber) {
-		if (notAgedBrie(itemNumber) && notTafkal80Etc(itemNumber)) {
+		if (agedBrie(itemNumber) || isTafkal80Etc(itemNumber)) {
+			restockNeededItems(itemNumber);
+		} else {
 			if (availableStock(itemNumber)) {
 				if (notSulfurasRagnaros(itemNumber)) {
 					removeItem(itemNumber);
@@ -76,8 +82,6 @@ public class StockHandler {
 			} else {
 				removeAllQuantity(itemNumber);
 			}
-		} else {
-			restockNeededItems(itemNumber);
 		}
 	}
 
