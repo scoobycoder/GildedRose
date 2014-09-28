@@ -1,37 +1,38 @@
 
 public class BackstagePasses implements Item {
 
-	public BackstagePasses(int i, int j) {
-		// TODO Auto-generated constructor stub
+	private int quantity;
+	private int sellIn;
+	private String name = "Backstage passes to a TAFKAL80ETC concert";	
+	
+	public BackstagePasses(int quantity, int sellIn) {
+		this.quantity = quantity;
+		this.sellIn = sellIn;
 	}
 
 	@Override
 	public String getName() {
-		return "Backstage passes to a TAFKAL80ETC concert";
+		return name;
 	}
 
 	@Override
 	public int getSellIn() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sellIn;
 	}
 
 	@Override
 	public void setSellIn(int sellIn) {
-		// TODO Auto-generated method stub
-
+		this.sellIn = sellIn;
 	}
 
 	@Override
 	public int getQuality() {
-		// TODO Auto-generated method stub
-		return 0;
+		return quantity;
 	}
 
 	@Override
 	public void setQuality(int quality) {
-		// TODO Auto-generated method stub
-
+		this.quantity = quality;
 	}
 
 }

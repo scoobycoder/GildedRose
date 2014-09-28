@@ -24,7 +24,7 @@ public class StockHandler {
         {
             if (notAgedBrie(itemNumber) && notTafkal80Etc(itemNumber)) 
             {
-                if (outOfStock(itemNumber))
+                if (availableStock(itemNumber))
                 {
                     if (notSulfurasRagnaros(itemNumber))
                     {
@@ -64,7 +64,7 @@ public class StockHandler {
                 {
                     if (notTafkal80Etc(itemNumber))
                     {
-                        if (outOfStock(itemNumber))
+                        if (availableStock(itemNumber))
                         {
                             if (notSulfurasRagnaros(itemNumber))
                             {
@@ -124,7 +124,7 @@ public class StockHandler {
 		itemList.get(itemNumber).setSellIn(itemList.get(itemNumber).getSellIn() - 1);
 	}
 
-	private boolean outOfStock(int itemNumber) {
+	private boolean availableStock(int itemNumber) {
 		return itemList.get(itemNumber).getQuality() > 0;
 	}
 

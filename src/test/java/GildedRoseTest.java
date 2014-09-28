@@ -70,4 +70,20 @@ public class GildedRoseTest {
 		assertEquals(1, stocker.inventoryReport().get(0).getQuality());
 	}
 	
+	@Test
+	public void Tafkal80EtcAboutToSpoilAddTwoUnits() {
+		stocker.addItem(new BackstagePasses(1, 10));
+		stocker.updateQuality();
+		
+		assertEquals(3, stocker.inventoryReport().get(0).getQuality());
+	}
+	
+	@Test
+	public void dexterityVestShouldBeSoldIfStockAvailable() {
+		stocker.addItem(new DexterityVest(10, 10));
+		stocker.updateQuality();
+		
+		assertEquals(9, stocker.inventoryReport().get(0).getQuality());
+	}
+	
 }
