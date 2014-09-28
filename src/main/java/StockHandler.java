@@ -72,16 +72,24 @@ public class StockHandler {
 	}
 
 	private void handleItemsThatAreCompletelySpoiled(int itemNumber) {
-		if (agedBrie(itemNumber) || isTafkal80Etc(itemNumber)) {
+		if (brieOrTafkal(itemNumber)) {
 			restockNeededItems(itemNumber);
 		} else {
-			if (availableStock(itemNumber)) {
-				if (notSulfurasRagnaros(itemNumber)) {
-					removeItem(itemNumber);
-				}
-			} else {
-				removeAllQuantity(itemNumber);
+			removeQuantity(itemNumber);
+		}
+	}
+
+	private boolean brieOrTafkal(int itemNumber) {
+		return agedBrie(itemNumber) || isTafkal80Etc(itemNumber);
+	}
+
+	private void removeQuantity(int itemNumber) {
+		if (availableStock(itemNumber)) {
+			if (notSulfurasRagnaros(itemNumber)) {
+				removeItem(itemNumber);
 			}
+		} else {
+			removeAllQuantity(itemNumber);
 		}
 	}
 
@@ -106,16 +114,8 @@ public class StockHandler {
 				itemList.get(itemNumber).getQuality() - 1);
 	}
 
-	private boolean notTafkal80Etc(int itemNumber) {
-		return !isTafkal80Etc(itemNumber);
-	}
-
 	private boolean agedBrie(int itemNumber) {
 		return AGED_BRIE.equals(itemList.get(itemNumber).getName());
-	}
-
-	private boolean notAgedBrie(int itemNumber) {
-		return !AGED_BRIE.equals(itemList.get(itemNumber).getName());
 	}
 
 	private boolean notSulfurasRagnaros(int itemNumber) {
