@@ -12,6 +12,12 @@ public class GildedRoseTest {
 	private List<Item> expectedItems;
 	private StockHandler stocker;
 
+	private void sellFiftyVests(Item vest) {
+		for (int i = 0; i < 50; i++){
+			vest.sell();
+		}
+	}
+	
 	@Before
 	public void setup() {
 		expectedItems = new ArrayList<Item>();
@@ -117,5 +123,19 @@ public class GildedRoseTest {
 		assertEquals(true, vest.sell());
 	}
 	
+	@Test
+	public void sellingTwoVestsWhenOneRemainsShouldFail() {
+		Item vest = new DexterityVest(2, 1);
+		vest.sell();
+		assertEquals(false, vest.sell());
+	}
 	
+	@Test
+	public void shouldRestock50ItemsAtATime() {
+		Item vest = new DexterityVest(2, 1);
+		vest.restock();
+		sellFiftyVests(vest);
+		assertEquals(true, vest.sell());
+	}
+
 }

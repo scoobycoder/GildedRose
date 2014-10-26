@@ -39,7 +39,7 @@ public class Item {
 	}
 
 	public void restock() {
-		quantity += 10;
+		quantity += 50;
 	}
 
 }
