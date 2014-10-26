@@ -5,4 +5,9 @@ public class SulfurasRagnaros extends Item {
 		super(sellIn, quantity);
 	}
 
+	@Override
+	public boolean stockRemains() {
+		return true;
+	}
+	
 }

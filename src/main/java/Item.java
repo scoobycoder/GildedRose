@@ -38,4 +38,8 @@ public class Item {
 		return quantity > 0;
 	}
 
+	public void restock() {
+		quantity += 10;
+	}
+
 }
