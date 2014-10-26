@@ -97,12 +97,6 @@ public class StockHandler {
 		return TAFKAL80ETC.equals(itemList.get(itemNumber).getName());
 	}
 
-	private void removeAllQuantity(int itemNumber) {
-		itemList.get(itemNumber).setQuality(
-				itemList.get(itemNumber).getQuality()
-						- itemList.get(itemNumber).getQuality());
-	}
-
 	private void removeItem(int itemNumber) {
 		itemList.get(itemNumber).setQuality(
 				itemList.get(itemNumber).getQuality() - 1);

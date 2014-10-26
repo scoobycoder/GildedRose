@@ -89,4 +89,19 @@ public class GildedRoseTest {
 		assertEquals(true, vest.stockRemains());
 	}
 	
+	@Test
+	public void sellDexterityVestIfStockAvailable() {
+		Item vest = new DexterityVest(3, 3);
+		vest.dayPasses();
+		
+		assertEquals(true, vest.sell());
+	}
+	
+	@Test
+	public void failToSellDexterityVestIfNoStockAvailable() {
+		Item vest = new DexterityVest(1, 0);
+		vest.dayPasses();
+		assertEquals(false, vest.sell());
+	}
+	
 }
