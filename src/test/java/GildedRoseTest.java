@@ -18,7 +18,7 @@ public class GildedRoseTest {
 		stocker = new StockHandler();
 	}
 	
-	@Test @Ignore
+	@Test
 	public void stockHandlerShouldAllowAddingInventory() {
 		Item manaCake = new ManaCake(10, 5);
 		expectedItems.add(manaCake);
@@ -77,15 +77,17 @@ public class GildedRoseTest {
 		stocker.addItem(new BackstagePasses(1, 10));
 		stocker.updateQuality();
 		
-		assertEquals(3, stocker.inventoryReport().get(0).getQuality());
+		Item tafkal80 = new Taf;
+		assertEquals(true, tafkal80 .stockRemains());
 	}
 	
-	@Test @Ignore
+	@Test
 	public void dexterityVestShouldBeSoldIfStockAvailable() {
-		stocker.addItem(new DexterityVest(10, 10));
-		stocker.updateQuality();
+		Item vest = new DexterityVest(10, 10);
 		
-		assertEquals(9, stocker.inventoryReport().get(0).getQuality());
+		vest.dayPasses();
+		
+		assertEquals(true, vest.stockRemains());
 	}
 	
 }
