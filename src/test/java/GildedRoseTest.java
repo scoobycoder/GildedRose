@@ -72,13 +72,12 @@ public class GildedRoseTest {
 		assertEquals(true, agedBrie.stockRemains());
 	}
 	
-	@Test @Ignore
+	@Test
 	public void Tafkal80EtcAboutToSpoilAddTwoUnits() {
-		stocker.addItem(new BackstagePasses(1, 10));
-		stocker.updateQuality();
+		Item tafkal80 = new Tafkal80(1, 1);
+		tafkal80.dayPasses();
 		
-		Item tafkal80 = new Taf;
-		assertEquals(true, tafkal80 .stockRemains());
+		assertEquals(true, tafkal80.stockRemains());
 	}
 	
 	@Test
