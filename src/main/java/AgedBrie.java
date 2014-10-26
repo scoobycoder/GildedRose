@@ -1,37 +1,12 @@
 
-public class AgedBrie implements Item {
+public class AgedBrie extends Item {
 
-	private int quantity;
-	private int sellIn;
+	public AgedBrie(int sellIn, int quantity) {
+		super(sellIn, quantity);
+	}
 	
-	public AgedBrie(int quantity, int sellIn) {
-		this.quantity = quantity;
-		this.sellIn = sellIn;
-	}
-
 	@Override
-	public String getName() {
-		return "Aged Brie";
-	}
-
-	@Override
-	public int getSellIn() {
-		return sellIn;
-	}
-
-	@Override
-	public void setSellIn(int sellIn) {
-		this.sellIn = sellIn;
-	}
-
-	@Override
-	public int getQuality() {
-		return this.quantity;
-	}
-
-	@Override
-	public void setQuality(int quality) {
-		this.quantity = quality;
+	public void dayPasses() {
 	}
 
 }

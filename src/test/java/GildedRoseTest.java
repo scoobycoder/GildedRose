@@ -28,7 +28,7 @@ public class GildedRoseTest {
 		assertEquals(expectedItems, stocker.inventoryReport());
 	}
 	
-	@Test  @Ignore
+	@Test
 	public void stockHandlerShouldAllowAddingAllTypes() {
 		Item manaCake = new ManaCake(10, 5);
 		Item dexterityVest = new DexterityVest(10, 20);
@@ -56,19 +56,20 @@ public class GildedRoseTest {
 
 	@Test
 	public void removeManaCakeWhenAboutToSpoil() {
-		Item manaCake = new ManaCake(0, 1);
+		Item manaCake = new ManaCake(1, 1);
 		
 		manaCake.dayPasses();
 		
 		assertEquals(false, manaCake.stockRemains());
 	}
 
-	@Test @Ignore
+	@Test
 	public void neverRemoveAgedBrieForSpoiling() {
-		stocker.addItem(new AgedBrie(0, 1));
-		stocker.updateQuality();
+		Item agedBrie = new AgedBrie(1, 1);
 		
-		assertEquals(1, stocker.inventoryReport().get(0).getQuality());
+		agedBrie.dayPasses();
+		
+		assertEquals(true, agedBrie.stockRemains());
 	}
 	
 	@Test @Ignore
