@@ -14,9 +14,12 @@ public class StockHandler {
 	}
 
 	public void updateQuality() {
-		for (int itemNumber = 0; itemNumber < itemList.size(); itemNumber++) {
-			
+		for (Item item : itemList) {
+			item.dayPasses();
+			if (item.stockRemains() == false)
+				itemList.remove(item);
 		}
+		
 	}
 
 }

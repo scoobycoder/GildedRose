@@ -137,5 +137,14 @@ public class GildedRoseTest {
 		sellFiftyVests(vest);
 		assertEquals(true, vest.sell());
 	}
+	
+	@Test
+	public void allItemsAgedPastUseRemovedFromStock() {
+		Item dexterityVest = new DexterityVest(1, 20);
+		stocker.addItem(dexterityVest);
+		stocker.updateQuality();
+		
+		assertTrue(stocker.inventoryReport().isEmpty());
+	}
 
 }
